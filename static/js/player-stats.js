@@ -44,10 +44,14 @@ function SetupTopTen(htmlElement, listOfEntrants)
     entrants.sort(function (a, b) {
         return b.points - a.points;
     })
-    for(var i = 0; i < entrants.length; i++)
+    for(var j = 0; j < 5; j++)
     {
-        AddTableEntry(htmlElement, entrants[i]);
+        for(var i = 0; i < entrants.length; i++)
+        {
+            AddTableEntry(htmlElement, entrants[i]);
+        }
     }
+
     
 }
 
