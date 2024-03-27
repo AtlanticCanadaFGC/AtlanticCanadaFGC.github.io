@@ -40,11 +40,9 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="headtohead.html">Current Standings</a>
           </li>
-          <!---
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="eloleaderboard.html">Elo Leaderboard</a>
           </li>
-        -->
         </ul>
       </div>
     </div>
@@ -71,9 +69,7 @@
           <tr>
             <th scope="col">Rank</th>
             <th scope="col">Tag</th>
-            <th scope="col">Province</th>
-            <th scope="col">Points</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Elo</th>
           </tr>
         </thead>
         <tbody id="search-body">
@@ -89,20 +85,31 @@
   </section>
   <section class="bg-light text-center justify-content-center" style="gap: 10px">
     <h2>Current Leaders</h2>
-    <table id="top-ten-table" class="table center" style="width: 50%; margin-left: auto; margin-right: auto;">
+    <table id="top-ten-table" class="table center" style="width: 30%; margin-left: auto; margin-right: auto;">
       <thead>
         <tr>
           <th scope="col">Rank</th>
           <th scope="col">Tag</th>
-          <th scope="col">Province</th>
-          <th scope="col">Points</th>
-          <th scope="col">Handle</th>
+          <th scope="col">Elo</th>
         </tr>
       </thead>
       <tbody id="top-ten-body">
         
       </tbody>
     </table>
+  </section>
+  <section class="bg-light text-center justify-content-center" style="gap: 10px">
+    <div>
+      <h2>
+        Head to Head
+      </h2>
+    </div>
+    <div>
+        <!-- Filled in by player-stats.js-->
+      <input class="col-sm-6 custom-select custom-select-sm" list="player-list" id="p1-list-input" style="width: 300px"></input>
+      <input class="col-sm-6 custom-select custom-select-sm" list="player-list" id="p2-list-input" style="width: 300px"></input>
+      <button type="button" id="headToHeadSubmit" class="btn btn-secondary" aria-pressed="false" autocomplete="off">Submit</button>
+  </div>
   </section>
 
 
@@ -111,7 +118,7 @@
 
   <!-- Plugin JavaScript -->
   <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="static/js/player-stats.js"></script>
+  <script src="static/js/elo-leaderboard.js"></script>
 
 </body>
 </html> 

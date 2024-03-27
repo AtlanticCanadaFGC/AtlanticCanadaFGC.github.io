@@ -2,8 +2,9 @@
     "use strict"; // Start of use strict
 
     let hasSetup = false;
+    let hasSetupMatchHistory = false;
     var leaderboardArray;
-    $.get("https://sheets.googleapis.com/v4/spreadsheets/138r0B4gZyRnHLk2ZVE4uCuOlr5j3fZy_3-ER0eAB8BY/values/Sheet1!A1:D1000?key=AIzaSyBIzZa8oXWdByQBMlBT_oOxNSaNFDe6boE", (data, status) => {
+    $.get("https://sheets.googleapis.com/v4/spreadsheets/1K5ksuiCRIQx5VKMyUHGGNMotAFO24Oia14c05qqLd4U/values/Sheet1!B1:C1000?key=AIzaSyBIzZa8oXWdByQBMlBT_oOxNSaNFDe6boE", (data, status) => {
         leaderboardArray = GeneratePlayerList(data.values);
         for(var i = 0; i < leaderboardArray.length; i++)
         {
@@ -12,6 +13,11 @@
         $("#top-ten-body").empty();
         SetupTopTen($("#top-ten-body"), leaderboardArray);
         hasSetup = true;
+    });
+
+    $.get("https://sheets.googleapis.com/v4/spreadsheets/1K5ksuiCRIQx5VKMyUHGGNMotAFO24Oia14c05qqLd4U/values/Sheet1!B1:C1000?key=AIzaSyBIzZa8oXWdByQBMlBT_oOxNSaNFDe6boE", (data, status) => {
+        
+        hasSetupMatchHistory = true;
     });
     
     $("#submitBtn").on("click", function(e) {
@@ -63,9 +69,7 @@ function GeneratePlayerList(values)
         playerList.push( {
             rank: i,
             name: values[i][0],
-            points: values[i][1],
-            handle: values[i][2],
-            prov: values[i][3]
+            elo: values[i][1],
         })
     }
     return playerList;
@@ -77,9 +81,7 @@ function AddTableEntry(htmElement, entryFound)
         '<tr>' + 
         '<td scope="row">' + entryFound.rank + '</td>' + 
         '<td>' + entryFound.name + '</td>' + 
-        '<td>' + entryFound.prov + '</td>' + 
-        '<td>' + entryFound.points + '</td>' + 
-        '<td>' + entryFound.handle + '</td>' +
+        '<td>' + entryFound.elo + '</td>' + 
         '</tr>'
     );
 }
