@@ -57,6 +57,14 @@
 
 
   <section class="bg-light text-center justify-content-center" style="gap: 10px">
+    <!-- Removing game select for now unless sf or other games wanna add their bit
+    <h2>Game Select</h2>
+    <input class="col-sm-6 custom-select custom-select-sm" list="game-select" id="game-select-input" style="width: 200px; margin-bottom: 20px;"></input>
+    <datalist id="game-select">
+      <option value="Tekken"></option>
+      <option value="Street Fighter 6"></option>
+    </datalist> 
+    -->
     <h2>Player Lookup</h2>
       <label for="player-list">Player Select</label>
         <!-- Filled in by player-stats.js-->
@@ -70,6 +78,8 @@
             <th scope="col">Rank</th>
             <th scope="col">Tag</th>
             <th scope="col">Elo</th>
+            <th scope="col">Match Win %</th>
+            <th scope="col">Set Win %</th>
           </tr>
         </thead>
         <tbody id="search-body">
@@ -82,21 +92,6 @@
       </table>
 
 
-  </section>
-  <section class="bg-light text-center justify-content-center" style="gap: 10px">
-    <h2>Current Leaders</h2>
-    <table id="top-ten-table" class="table center" style="width: 30%; margin-left: auto; margin-right: auto;">
-      <thead>
-        <tr>
-          <th scope="col">Rank</th>
-          <th scope="col">Tag</th>
-          <th scope="col">Elo</th>
-        </tr>
-      </thead>
-      <tbody id="top-ten-body">
-        
-      </tbody>
-    </table>
   </section>
   <section class="bg-light text-center justify-content-center" style="gap: 10px">
     <div>
@@ -123,6 +118,23 @@
       <h1>thisisanotherlongname</h1>
     </div>
   </div>
+  </section>
+  <section class="bg-light text-center justify-content-center" style="gap: 10px">
+    <h2>Current Leaders</h2>
+    <table id="top-ten-table" class="table center" style="width: 50%; margin-left: auto; margin-right: auto;">
+      <thead>
+        <tr>
+          <th scope="col">Rank</th>
+          <th scope="col">Tag</th>
+          <th scope="col">Elo</th>
+          <th scope="col">Match Win %</th>
+          <th scope="col">Set Win %</th>
+        </tr>
+      </thead>
+      <tbody id="top-ten-body">
+        
+      </tbody>
+    </table>
   </section>
   <section>
 

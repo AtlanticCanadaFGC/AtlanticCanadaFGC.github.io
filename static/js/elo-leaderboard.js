@@ -5,6 +5,14 @@
     let hasSetupMatchHistory = false;
     var leaderboardArray;
     var matchHistory;
+
+    $.get("https://sheets.googleapis.com/v4/spreadsheets/1fCYFD3kxZ2smVV8FFFjE8gfQYtb2UJ1CW5H_U8HAjY8/values/Sheet1!B1:D2000?key=AIzaSyBIzZa8oXWdByQBMlBT_oOxNSaNFDe6boE", (data, status) => {
+        matchHistory = GenerateMatchHistory(data.values);
+        hasSetupMatchHistory = true;
+        if(hasSetup && hasSetupMatchHistory)
+            SetupTopTen($("#top-ten-body"), leaderboardArray, matchHistory);
+    });
+
     $.get("https://sheets.googleapis.com/v4/spreadsheets/1K5ksuiCRIQx5VKMyUHGGNMotAFO24Oia14c05qqLd4U/values/Sheet1!B1:C1000?key=AIzaSyBIzZa8oXWdByQBMlBT_oOxNSaNFDe6boE", (data, status) => {
         leaderboardArray = GeneratePlayerList(data.values);
         for(var i = 0; i < leaderboardArray.length; i++)
@@ -12,13 +20,9 @@
             $("#player-list").append('<option value="' + leaderboardArray[i].name + '">' + leaderboardArray[i].name + '</option>');
         }
         $("#top-ten-body").empty();
-        SetupTopTen($("#top-ten-body"), leaderboardArray);
         hasSetup = true;
-    });
-
-    $.get("https://sheets.googleapis.com/v4/spreadsheets/1fCYFD3kxZ2smVV8FFFjE8gfQYtb2UJ1CW5H_U8HAjY8/values/Sheet1!B1:D2000?key=AIzaSyBIzZa8oXWdByQBMlBT_oOxNSaNFDe6boE", (data, status) => {
-        matchHistory = GenerateMatchHistory(data.values);
-        hasSetupMatchHistory = true;
+        if(hasSetupMatchHistory && hasSetup)
+            SetupTopTen($("#top-ten-body"), leaderboardArray, matchHistory);
     });
     
     $("#submitBtn").on("click", function(e) {
@@ -37,7 +41,7 @@
             }
         }
         $("#search-body").empty();
-        AddTableEntry($("#search-body"), foundEntry);
+        AddTableEntry($("#search-body"), foundEntry, matchHistory);
     });
 
     $("#headToHeadSubmit").on("click", function(e) {
@@ -62,13 +66,14 @@
         $("#player-two").show();
     });
 
-    $("#player-list-input").on("change", function(e) {
+    $("#game-select-input").on("change", function(e) {
         console.log("Selected");
     });
+    
 })(jQuery);
 
 
-function SetupTopTen(htmlElement, listOfEntrants)
+function SetupTopTen(htmlElement, listOfEntrants, matchHistory)
 {
     var entrants = listOfEntrants;
     entrants.sort(function (a, b) {
@@ -76,7 +81,7 @@ function SetupTopTen(htmlElement, listOfEntrants)
     })
     for(var i = 0; i < entrants.length && i < 15; i++)
     {
-        AddTableEntry(htmlElement, entrants[i]);
+        AddTableEntry(htmlElement, entrants[i], matchHistory);
     }
 }
 
@@ -143,6 +148,39 @@ function GetScoreResults(p1Name, p2Name, matchHistory)
     return scoreResult;
 }
 
+function GetSetAndMatchPercent(p1Name, matchHistory)
+{
+    var result = matchHistory.filter((element) => {
+        return element.p1 == p1Name || element.p2 == p1Name
+    });
+    var totalMatches = 0, totalSets = result.length;
+    var wonSets = 0, wonMatches = 0;
+    for(var i = 0; i < result.length; i++)
+    {
+        var currentEntrant = result[i];
+        if(currentEntrant.p1 == p1Name)
+        {
+            if(currentEntrant.p1Score > currentEntrant.p2Score)
+                wonSets++;
+            wonMatches += currentEntrant.p1Score;
+        }
+        else
+        {
+            if(currentEntrant.p2Score > currentEntrant.p1Score)
+                wonSets++;
+            wonMatches += currentEntrant.p2Score;
+        }
+        totalMatches += currentEntrant.p1Score + currentEntrant.p2Score;
+    }
+    var matchWinPercent = (wonMatches / parseFloat(totalMatches)) * 100.0;
+    var setWinPercent = (wonSets / parseFloat(totalSets))  * 100.0;
+    
+    return {
+        matchWinPercent: matchWinPercent.toFixed(1) + "%",
+        setWinPercent: setWinPercent.toFixed(1) + "%"
+    }
+}
+
 function GeneratePlayerList(values)
 {
     var playerList = [];
@@ -161,13 +199,16 @@ function GeneratePlayerList(values)
     return playerList;
 }
 
-function AddTableEntry(htmElement, entryFound)
+function AddTableEntry(htmElement, entryFound, matchHistory)
 {
+    var matchWinSetWin = GetSetAndMatchPercent(entryFound.name, matchHistory);
     htmElement.append( 
         '<tr>' + 
         '<td scope="row">' + entryFound.rank + '</td>' + 
         '<td>' + entryFound.name + '</td>' + 
         '<td>' + entryFound.elo + '</td>' + 
+        '<td>' + matchWinSetWin.matchWinPercent + '</td>' + 
+        '<td>' + matchWinSetWin.setWinPercent + '</td>' +
         '</tr>'
     );
 }
