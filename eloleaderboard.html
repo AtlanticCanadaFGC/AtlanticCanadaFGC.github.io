@@ -19,26 +19,20 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="static/img/logo.png" class="d-inline-block align-top img-fluid logo" alt="Logo"/></a>
+      <a class="navbar-brand js-scroll-trigger" href="index.html"><img src="static/img/AC_FGC_Logo.jpg" class="d-inline-block align-top img-fluid logo" alt="Logo"/></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="/#events">Events</a>
+            <a class="nav-link js-scroll-trigger" href="index.html#events">Events</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="/#tos">Tournament Organizers</a>
+            <a class="nav-link js-scroll-trigger" href="index.html#social">Find Your Scene</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="/#social">Social Media</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="/#streamers">Streamers</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="headtohead.html">Current Standings</a>
+            <a class="nav-link js-scroll-trigger" href="headtohead.html">Street Fighter Atlantic Cup Standings</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="eloleaderboard.html">Elo Leaderboard</a>
@@ -57,6 +51,14 @@
 
 
   <section class="bg-light text-center justify-content-center" style="gap: 10px">
+    <!-- Removing game select for now unless sf or other games wanna add their bit
+    <h2>Game Select</h2>
+    <input class="col-sm-6 custom-select custom-select-sm" list="game-select" id="game-select-input" style="width: 200px; margin-bottom: 20px;"></input>
+    <datalist id="game-select">
+      <option value="Tekken"></option>
+      <option value="Street Fighter 6"></option>
+    </datalist> 
+    -->
     <h2>Player Lookup</h2>
       <label for="player-list">Player Select</label>
         <!-- Filled in by player-stats.js-->
@@ -70,6 +72,10 @@
             <th scope="col">Rank</th>
             <th scope="col">Tag</th>
             <th scope="col">Elo</th>
+            <th scope="col">Match Win %</th>
+            <th scope="col">Set Win %</th>
+            <th scope="col">Total Matches</th>
+            <th scope="col">Total Sets</th>
           </tr>
         </thead>
         <tbody id="search-body">
@@ -84,21 +90,6 @@
 
   </section>
   <section class="bg-light text-center justify-content-center" style="gap: 10px">
-    <h2>Current Leaders</h2>
-    <table id="top-ten-table" class="table center" style="width: 30%; margin-left: auto; margin-right: auto;">
-      <thead>
-        <tr>
-          <th scope="col">Rank</th>
-          <th scope="col">Tag</th>
-          <th scope="col">Elo</th>
-        </tr>
-      </thead>
-      <tbody id="top-ten-body">
-        
-      </tbody>
-    </table>
-  </section>
-  <section class="bg-light text-center justify-content-center" style="gap: 10px">
     <div>
       <h2>
         Head to Head
@@ -110,6 +101,42 @@
       <input class="col-sm-6 custom-select custom-select-sm" list="player-list" id="p2-list-input" style="width: 300px"></input>
       <button type="button" id="headToHeadSubmit" class="btn btn-secondary" aria-pressed="false" autocomplete="off">Submit</button>
   </div>
+  <div id="headtohead"  class="row text-center" style="width: 40%; margin-left: auto; margin-right:auto; margin-top: 20px;" >
+    <div id="player-one"  class="col-sm" style="display: none;">
+      <h1>thisisthelongestname</h1>
+    </div>
+    <div id="score" class="text-center col-sm" style="display: none;">
+      <h1>0 - 2</h1>
+      <h3>0 - 2</h3>
+      <h5 class="text-muted">67% - 33%</h5>
+    </div>
+    <div id="player-two" class="col-sm" style="display: none;">
+      <h1>thisisanotherlongname</h1>
+    </div>
+  </div>
+  </section>
+  <section class="bg-light text-center justify-content-center" style="gap: 10px">
+    <h2>Current Leaders</h2>
+    <table id="top-ten-table" class="table center" style="width: 50%; margin-left: auto; margin-right: auto;">
+      <thead>
+        <tr>
+          <th scope="col">Rank</th>
+          <th scope="col">Tag</th>
+          <th scope="col">Elo</th>
+          <th scope="col">Match Win %</th>
+          <th scope="col">Set Win %</th>
+          <th scope="col">Total Matches</th>
+          <th scope="col">Total Sets</th>
+        </tr>
+      </thead>
+      <tbody id="top-ten-body">
+        
+      </tbody>
+    </table>
+  </section>
+  <section>
+
+
   </section>
 
 
