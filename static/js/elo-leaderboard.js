@@ -177,7 +177,9 @@ function GetSetAndMatchPercent(p1Name, matchHistory)
     
     return {
         matchWinPercent: matchWinPercent.toFixed(1) + "%",
-        setWinPercent: setWinPercent.toFixed(1) + "%"
+        setWinPercent: setWinPercent.toFixed(1) + "%",
+        totalSets: totalSets,
+        totalMatches: totalMatches
     }
 }
 
@@ -209,6 +211,8 @@ function AddTableEntry(htmElement, entryFound, matchHistory)
         '<td>' + entryFound.elo + '</td>' + 
         '<td>' + matchWinSetWin.matchWinPercent + '</td>' + 
         '<td>' + matchWinSetWin.setWinPercent + '</td>' +
+        '<td>' + matchWinSetWin.totalMatches + '</td>' + 
+        '<td>' + matchWinSetWin.totalSets + '</td>' +
         '</tr>'
     );
 }
