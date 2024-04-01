@@ -5,9 +5,13 @@
     var leaderboardArray;
     $.get("https://sheets.googleapis.com/v4/spreadsheets/138r0B4gZyRnHLk2ZVE4uCuOlr5j3fZy_3-ER0eAB8BY/values/Sheet1!A1:D1000?key=AIzaSyBIzZa8oXWdByQBMlBT_oOxNSaNFDe6boE", (data, status) => {
         leaderboardArray = GeneratePlayerList(data.values);
-        for(var i = 0; i < leaderboardArray.length; i++)
+        var sortedArray = leaderboardArray.slice(0, leaderboardArray.length);
+        sortedArray.sort((a, b) => {
+            return a.name.localeCompare(b.name);
+        })
+        for(var i = 0; i < sortedArray.length; i++)
         {
-            $("#player-list").append('<option value="' + leaderboardArray[i].name + '">' + leaderboardArray[i].name + '</option>');
+            $("#player-list").append('<option value="' + sortedArray[i].name + '">' + sortedArray[i].name + '</option>');
         }
         $("#top-ten-body").empty();
         SetupTopTen($("#top-ten-body"), leaderboardArray);

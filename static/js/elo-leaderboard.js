@@ -15,9 +15,13 @@
 
     $.get("https://sheets.googleapis.com/v4/spreadsheets/1K5ksuiCRIQx5VKMyUHGGNMotAFO24Oia14c05qqLd4U/values/Sheet1!B1:C1000?key=AIzaSyBIzZa8oXWdByQBMlBT_oOxNSaNFDe6boE", (data, status) => {
         leaderboardArray = GeneratePlayerList(data.values);
-        for(var i = 0; i < leaderboardArray.length; i++)
+        var sortedLeaderboard = leaderboardArray.slice(0, leaderboardArray.length);
+        sortedLeaderboard.sort((a, b) => {
+            return a.name.localeCompare(b.name);
+        });
+        for(var i = 0; i < sortedLeaderboard.length; i++)
         {
-            $("#player-list").append('<option value="' + leaderboardArray[i].name + '">' + leaderboardArray[i].name + '</option>');
+            $("#player-list").append('<option value="' + sortedLeaderboard[i].name + '">' + sortedLeaderboard[i].name + '</option>');
         }
         $("#top-ten-body").empty();
         hasSetup = true;
