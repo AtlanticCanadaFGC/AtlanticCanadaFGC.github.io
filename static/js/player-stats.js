@@ -64,6 +64,8 @@ function GeneratePlayerList(values)
     // Values are in name points handle province order
     for(var i = 1; i < values.length; i++)
     {
+        if(values[i][0].length == 0)
+            continue;
         playerList.push( {
             rank: i,
             name: values[i][0],
