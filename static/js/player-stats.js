@@ -66,8 +66,11 @@ function GeneratePlayerList(values)
     {
         if(values[i][0].length == 0)
             continue;
+        rank = i;
+        if(i > 1 && values[i][1] == values[i-1][1])
+            rank = playerList[i - 2].rank;
         playerList.push( {
-            rank: i,
+            rank: rank,
             name: values[i][0],
             points: values[i][1],
             handle: values[i][2],
