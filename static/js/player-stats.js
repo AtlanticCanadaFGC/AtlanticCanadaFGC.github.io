@@ -49,7 +49,7 @@ function SetupTopTen(htmlElement, listOfEntrants)
     entrants.sort(function (a, b) {
         return b.points - a.points;
     })
-    for(var i = 0; i < entrants.length && i < 15; i++)
+    for(var i = 0; i < entrants.length && i < 20; i++)
     {
         AddTableEntry(htmlElement, entrants[i]);
     }
